@@ -1,2 +1,4 @@
-package mate.academy.model;public class CinemaHall {
+package mate.academy.model;
+
+public class CinemaHall {
 }
