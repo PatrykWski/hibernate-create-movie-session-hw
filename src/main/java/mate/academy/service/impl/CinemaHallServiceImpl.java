@@ -13,10 +13,6 @@ public class CinemaHallServiceImpl implements CinemaHallService {
     @Inject
     private CinemaHallDao cinemaHallDao;
 
-    public CinemaHallServiceImpl(CinemaHallDao cinemaHallDao) {
-        this.cinemaHallDao = cinemaHallDao;
-    }
-
     @Override
     public CinemaHall add(CinemaHall cinemaHall) {
         return cinemaHallDao.add(cinemaHall);
@@ -24,7 +20,7 @@ public class CinemaHallServiceImpl implements CinemaHallService {
 
     @Override
     public CinemaHall get(Long id) {
-        return cinemaHallDao.get(id);
+        return cinemaHallDao.get(id).orElseThrow();
     }
 
     @Override
