@@ -3,28 +3,26 @@ package mate.academy;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import mate.academy.dao.impl.CinemaHallDaoImpl;
-import mate.academy.dao.impl.MovieDaoImpl;
-import mate.academy.dao.impl.MovieSessionDaoImpl;
+import mate.academy.lib.Injector;
 import mate.academy.model.CinemaHall;
 import mate.academy.model.Movie;
 import mate.academy.model.MovieSession;
 import mate.academy.service.CinemaHallService;
 import mate.academy.service.MovieService;
 import mate.academy.service.MovieSessionService;
-import mate.academy.service.impl.CinemaHallServiceImpl;
-import mate.academy.service.impl.MovieServiceImpl;
-import mate.academy.service.impl.MovieSessionServiceImpl;
 
 public class Main {
+    private static final Injector injector = Injector.getInstance("mate.academy");
+
     public static void main(String[] args) {
-        MovieService movieService = new MovieServiceImpl(new MovieDaoImpl());
+        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setDescription("An action film about street racing, heists, and spies.");
         movieService.add(fastAndFurious);
 
-        CinemaHallService cinemaHallService = new CinemaHallServiceImpl(new CinemaHallDaoImpl());
+        CinemaHallService cinemaHallService
+                = (CinemaHallService) injector.getInstance(CinemaHallService.class);
 
         CinemaHall redHall = new CinemaHall();
         redHall.setCapacity(100);
@@ -36,7 +34,7 @@ public class Main {
         movieSession.setShowTime(LocalDateTime.now().plusDays(1));
 
         MovieSessionService movieSessionService
-                = new MovieSessionServiceImpl(new MovieSessionDaoImpl());
+                = (MovieSessionService) injector.getInstance(MovieSessionService.class);
 
         movieSessionService.add(movieSession);
 
